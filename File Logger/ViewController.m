@@ -35,6 +35,12 @@
     [Logger writeDebugLog:@[@"123", @"456", @"789",@"123", @"456", @"789",@"123", @"456", @"789",@"123", @"456", @"789"]];
     
     [Logger writeReleaseLog:@{@"key":@"value", @"sex":@"M",@"key2":@"value", @"sex2":@"M",@"key3":@"value", @"sex3":@"M",@"key4":@"value", @"sex4":@"M",@"key5":@"value", @"sex5":@"M",@"key6":@"value", @"sex6":@"M",@"key7":@"value", @"sex7":@"M",@"key8":@"value", @"sex8":@"M"}];
+    
+    [Logger writeInfoLog:@"another info log line"];
+    
+    [Logger writeReleaseLog:@{@"key-release":@"value-release", @"sex-release":@"M-release"}];
+    
+    [Logger writeWarningLog:@"type warning type warning type"];
 }
 
 - (void)didReceiveMemoryWarning {

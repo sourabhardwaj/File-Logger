@@ -61,97 +61,85 @@ static Logger *sharedObject = nil;
 
 #pragma mark - Helper Methods for Writing
 + (void)writeDebugLog:(id)param {
-    [[self sharedInstance] writeContent:param forLogLevel:LogLevelDebug];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [[self sharedInstance] finishWriting:param];
+    });
 }
 
 + (void)writeWarningLog:(id)param {
-    [[self sharedInstance] writeContent:param forLogLevel:LogLevelWarn];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [[self sharedInstance] finishWriting:param];
+    });
 }
 
 + (void)writeReleaseLog:(id)param {
-    [[self sharedInstance] writeContent:param forLogLevel:LogLevelRelease];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [[self sharedInstance] finishWriting:param];
+    });
 }
 
 + (void)writeInfoLog:(id)param {
-    [[self sharedInstance] writeContent:param forLogLevel:LogLevelInfo];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [[self sharedInstance] finishWriting:param];
+    });
 }
 
 #pragma mark Write Log (Internal)
-- (void)writeContent:(id)param forLogLevel:(LoggerLevel)level {
-    switch (level) {
-        case LogLevelInfo: {
-            // do any specific related to Info log level
-            [self finishWriting:param];
-            break;
-        }
-        case LogLevelWarn: {
-            // do any specific related to Warn log level
-            [self finishWriting:param];
-            break;
-        }
-        case LogLevelRelease: {
-            // do any specific related to Info log level
-            [self finishWriting:param];
-            break;
-        }
-        default: { // LogLevelDebug
-            [self finishWriting:param];
-            break;
-        }
-    }
-}
-
 - (void)finishWriting:(id)content {
-    NSString *filePath = self.currentFilePath;
     
-    // NSFileHandle won't create the file for us, so we need to check to make sure it exists
-    if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+    @synchronized(self) {
+        NSString *filePath = self.currentFilePath;
         
-        // the file doesn't exist yet, so we can just write out the text using the
-        // NSString convenience method
-        
-        BOOL success = [content writeToFile:filePath atomically:YES];
-        if (success) {
-            NSLog(@"file creation success");
-        } else {
-            NSLog(@"file creation failure");
-        }
-        
-    } else { // the file already exists, so we should append the text to the end
-        
-        // get a handle to the file
-        NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:filePath];
-        
-        if (fileHandle == nil) {
-            return; // file is not ready to write
-        }
-        
-        @try {
-            // move to the end of the file
-            [fileHandle seekToEndOfFile];
+        // NSFileHandle won't create the file for us, so we need to check to make sure it exists
+        if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
             
-            NSString *strData;
-            if ([content isKindOfClass:[NSString class]]) {
-                strData = (NSString *)content;
-            } else if([content isKindOfClass:[NSArray class]] || [content isKindOfClass:[NSMutableArray class]]) {
-                strData = [self serializeData:content];
-            } else if([content isKindOfClass:[NSDictionary class]] || [content isKindOfClass:[NSMutableDictionary class]]) {
-                strData = [self serializeData:content];
-            } else if([content isKindOfClass:[NSError class]]) {
-                strData = [content description];
+            // the file doesn't exist yet, so we can just write out the text using the
+            // NSString convenience method
+            
+            BOOL success = [content writeToFile:filePath atomically:YES];
+            if (success) {
+                NSLog(@"file creation success");
+            } else {
+                NSLog(@"file creation failure");
             }
             
-            NSMutableString *mutableString = [[NSMutableString alloc] initWithString:strData];
-            [mutableString appendFormat:@"\n %s at line: %d",__PRETTY_FUNCTION__, __LINE__];
-            [mutableString appendFormat:@"\n=============== ===============  ===============  ===============  ===============\n"];
+        } else { // the file already exists, so we should append the text to the end
             
-            // write the data to the end of the file
-            [fileHandle writeData:[mutableString dataUsingEncoding:NSUTF8StringEncoding]];
+            // get a handle to the file
+            NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:filePath];
             
-            // clean up
-            [fileHandle closeFile];
-        } @catch (NSException * e) {
-            NSLog(@"exception in adding log to file = %@",e.description);
+            if (fileHandle == nil) {
+                NSLog(@"File handle not found");
+                return; // file is not ready to write
+            }
+            
+            @try {
+                // move to the end of the file
+                [fileHandle seekToEndOfFile];
+                
+                NSString *strData;
+                if ([content isKindOfClass:[NSString class]]) {
+                    strData = (NSString *)content;
+                } else if([content isKindOfClass:[NSArray class]] || [content isKindOfClass:[NSMutableArray class]]) {
+                    strData = [self serializeData:content];
+                } else if([content isKindOfClass:[NSDictionary class]] || [content isKindOfClass:[NSMutableDictionary class]]) {
+                    strData = [self serializeData:content];
+                } else if([content isKindOfClass:[NSError class]]) {
+                    strData = [content description];
+                }
+                
+                NSMutableString *mutableString = [[NSMutableString alloc] initWithString:strData];
+                [mutableString appendFormat:@"\n %s at line: %d",__PRETTY_FUNCTION__, __LINE__];
+                [mutableString appendFormat:@"\n=============== ===============  ===============  ===============  ===============\n"];
+                
+                // write the data to the end of the file
+                [fileHandle writeData:[mutableString dataUsingEncoding:NSUTF8StringEncoding]];
+                
+                // clean up
+                [fileHandle closeFile];
+            } @catch (NSException * e) {
+                NSLog(@"exception in adding log to file = %@",e.description);
+            }
         }
     }
 }
