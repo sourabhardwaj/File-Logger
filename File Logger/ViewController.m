@@ -13,7 +13,6 @@
 @interface ViewController ()<MFMailComposeViewControllerDelegate>
 - (IBAction)emailPreviousLog:(id)sender;
 - (IBAction)emailCurrentLog:(id)sender;
-
 @end
 
 @implementation ViewController
@@ -62,7 +61,7 @@
     [composer.navigationBar setTintColor:[UIColor whiteColor]];
     [composer setMailComposeDelegate:self];
     if ([MFMailComposeViewController canSendMail]) {
-        [composer setToRecipients:[NSArray arrayWithObjects:@"sourabh.bhardwaj@appster.in", nil]];
+        [composer setToRecipients:[NSArray arrayWithObjects:@"YOUR_EMAIL_GOES_HERE", nil]];
         [composer setSubject:@"Log Report"];
         
         [composer setMessageBody:@"Exporting log file to have more debug information." isHTML:NO];
