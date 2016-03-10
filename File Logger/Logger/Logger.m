@@ -61,15 +61,19 @@ static Logger *sharedObject = nil;
 
 #pragma mark - Helper Methods for Writing
 + (void)writeDebugLog:(id)param {
+#if DEBUG
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [[self sharedInstance] finishWriting:param];
     });
+#endif
 }
 
 + (void)writeWarningLog:(id)param {
+#if DEBUG
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [[self sharedInstance] finishWriting:param];
     });
+#endif
 }
 
 + (void)writeReleaseLog:(id)param {
@@ -79,9 +83,11 @@ static Logger *sharedObject = nil;
 }
 
 + (void)writeInfoLog:(id)param {
+#if DEBUG
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [[self sharedInstance] finishWriting:param];
     });
+#endif
 }
 
 #pragma mark Write Log (Internal)
