@@ -15,6 +15,8 @@
 		2138A89E1C901DA800EC73D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2138A89C1C901DA800EC73D6 /* LaunchScreen.storyboard */; };
 		2138A8A91C901DA800EC73D6 /* File_LoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2138A8A81C901DA800EC73D6 /* File_LoggerTests.m */; };
 		2138A8B41C901DA800EC73D6 /* File_LoggerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2138A8B31C901DA800EC73D6 /* File_LoggerUITests.m */; };
+		2138A8C81C901FD900EC73D6 /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2138A8C71C901FD900EC73D6 /* Logger.m */; };
+		2138A8CA1C9128FC00EC73D6 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2138A8C91C9128FC00EC73D6 /* MessageUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,9 @@
 		2138A8AF1C901DA800EC73D6 /* File LoggerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "File LoggerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2138A8B31C901DA800EC73D6 /* File_LoggerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = File_LoggerUITests.m; sourceTree = "<group>"; };
 		2138A8B51C901DA800EC73D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2138A8C61C901FD900EC73D6 /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
+		2138A8C71C901FD900EC73D6 /* Logger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Logger.m; sourceTree = "<group>"; };
+		2138A8C91C9128FC00EC73D6 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2138A8CA1C9128FC00EC73D6 /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +87,7 @@
 		2138A8821C901DA800EC73D6 = {
 			isa = PBXGroup;
 			children = (
+				2138A8C91C9128FC00EC73D6 /* MessageUI.framework */,
 				2138A88D1C901DA800EC73D6 /* File Logger */,
 				2138A8A71C901DA800EC73D6 /* File LoggerTests */,
 				2138A8B21C901DA800EC73D6 /* File LoggerUITests */,
@@ -101,6 +108,7 @@
 		2138A88D1C901DA800EC73D6 /* File Logger */ = {
 			isa = PBXGroup;
 			children = (
+				2138A8C51C901FA100EC73D6 /* Logger */,
 				2138A8911C901DA800EC73D6 /* AppDelegate.h */,
 				2138A8921C901DA800EC73D6 /* AppDelegate.m */,
 				2138A8941C901DA800EC73D6 /* ViewController.h */,
@@ -138,6 +146,15 @@
 				2138A8B51C901DA800EC73D6 /* Info.plist */,
 			);
 			path = "File LoggerUITests";
+			sourceTree = "<group>";
+		};
+		2138A8C51C901FA100EC73D6 /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				2138A8C61C901FD900EC73D6 /* Logger.h */,
+				2138A8C71C901FD900EC73D6 /* Logger.m */,
+			);
+			path = Logger;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,6 +290,7 @@
 				2138A8961C901DA800EC73D6 /* ViewController.m in Sources */,
 				2138A8931C901DA800EC73D6 /* AppDelegate.m in Sources */,
 				2138A8901C901DA800EC73D6 /* main.m in Sources */,
+				2138A8C81C901FD900EC73D6 /* Logger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
