@@ -87,7 +87,6 @@
 		2138A8821C901DA800EC73D6 = {
 			isa = PBXGroup;
 			children = (
-				2138A8C91C9128FC00EC73D6 /* MessageUI.framework */,
 				2138A88D1C901DA800EC73D6 /* File Logger */,
 				2138A8A71C901DA800EC73D6 /* File LoggerTests */,
 				2138A8B21C901DA800EC73D6 /* File LoggerUITests */,
@@ -108,7 +107,6 @@
 		2138A88D1C901DA800EC73D6 /* File Logger */ = {
 			isa = PBXGroup;
 			children = (
-				2138A8C51C901FA100EC73D6 /* Logger */,
 				2138A8911C901DA800EC73D6 /* AppDelegate.h */,
 				2138A8921C901DA800EC73D6 /* AppDelegate.m */,
 				2138A8941C901DA800EC73D6 /* ViewController.h */,
@@ -117,7 +115,9 @@
 				2138A89A1C901DA800EC73D6 /* Assets.xcassets */,
 				2138A89C1C901DA800EC73D6 /* LaunchScreen.storyboard */,
 				2138A89F1C901DA800EC73D6 /* Info.plist */,
+				2138A8C51C901FA100EC73D6 /* Logger */,
 				2138A88E1C901DA800EC73D6 /* Supporting Files */,
+				2138A8CB1C9133C200EC73D6 /* Frameworks */,
 			);
 			path = "File Logger";
 			sourceTree = "<group>";
@@ -155,6 +155,15 @@
 				2138A8C71C901FD900EC73D6 /* Logger.m */,
 			);
 			path = Logger;
+			sourceTree = "<group>";
+		};
+		2138A8CB1C9133C200EC73D6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2138A8C91C9128FC00EC73D6 /* MessageUI.framework */,
+			);
+			name = Frameworks;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

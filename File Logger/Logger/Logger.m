@@ -11,7 +11,7 @@
 
 @interface Logger ()<MFMailComposeViewControllerDelegate>
 
-#define LOGGER_FILE_NAME_INITIALS @"6_Logger_File_Dated"
+#define LOGGER_FILE_NAME_INITIALS @"Logger_File_Dated"
 #define LOGGER_PREVIOUS_FILE_NAME @"_Logger_Previous_File_Name_"
 
 @end
