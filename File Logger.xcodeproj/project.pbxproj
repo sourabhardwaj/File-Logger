@@ -56,6 +56,7 @@
 		2138A8C61C901FD900EC73D6 /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
 		2138A8C71C901FD900EC73D6 /* Logger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Logger.m; sourceTree = "<group>"; };
 		2138A8C91C9128FC00EC73D6 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		2138A8CD1C92859600EC73D6 /* LoggerMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoggerMacros.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +154,7 @@
 			children = (
 				2138A8C61C901FD900EC73D6 /* Logger.h */,
 				2138A8C71C901FD900EC73D6 /* Logger.m */,
+				2138A8CD1C92859600EC73D6 /* LoggerMacros.h */,
 			);
 			path = Logger;
 			sourceTree = "<group>";
@@ -523,6 +525,7 @@
 				2138A8BA1C901DA800EC73D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2138A8BB1C901DA800EC73D6 /* Build configuration list for PBXNativeTarget "File LoggerTests" */ = {
 			isa = XCConfigurationList;
@@ -531,6 +534,7 @@
 				2138A8BD1C901DA800EC73D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2138A8BE1C901DA800EC73D6 /* Build configuration list for PBXNativeTarget "File LoggerUITests" */ = {
 			isa = XCConfigurationList;
@@ -539,6 +543,7 @@
 				2138A8C01C901DA800EC73D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

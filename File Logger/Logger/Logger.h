@@ -7,61 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-
-//#define LOG_SELECTOR()  NSLog(@"%@: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
-
-//#define CALL_ORIGIN NSLog(@"Origin: [%@]", [[[[NSThread callStackSymbols] objectAtIndex:1] componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"[]"]] objectAtIndex:1])
-
-#ifdef DEBUG
-#define DebugLog( s, ... ) NSLog( @"<%p %@ %s:(%d)> %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent],__PRETTY_FUNCTION__, __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
-#else
-#define DebugLog( s, ... )
-#endif
-
-#define DEBUG_MODE 1
-
-#ifdef DEBUG_MODE
-#define DebugLogLevel(var, ... ) [[Logger sharedInstance] writeDebugLog:(@"<%p %@ %s:(%d)> %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent],__PRETTY_FUNCTION__, __LINE__, [NSString stringWithFormat:(var), ##__VA_ARGS__])]
-#else
-#define DebugLogLevel( ... )
-#endif
-
-
-//#ifdef DEBUG
-//#define ReleaseLogLevel( s, ... ) [Logger writeReleaseLog( @"<%p %@ %s:(%d)> %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent],__PRETTY_FUNCTION__, __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )]
-//#else
-//#define ReleaseLogLevel( s, ... )
-//#endif
-
-
-
-//#ifdef DEBUG
-//#define InfoLogLevel( s, ... ) [Logger writeInfoLog( @"<%p %@ %s:(%d)> %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent],__PRETTY_FUNCTION__, __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )]
-//#else
-//#define InfoLogLevel( s, ... )
-//#endif
-
-
-//#ifdef DEBUG
-//#define WarnLogLevel( s, ... ) [Logger writeWarningLog( @"<%p %@ %s:(%d)> %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent],__PRETTY_FUNCTION__, __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )]
-//#else
-//#define WarnLogLevel( s, ... )
-//#endif
-
-
-
-//#define DLog(...) [Logger writeDebugLog:(##__VA_ARGS__)]
-//#define WLog(...) [Logger writeWarningLog:(##__VA_ARGS__)]
-//#define ILog(...) [Logger writeInfoLog:(##__VA_ARGS__)]
-//#define RLog(...) [Logger writeReleaseLog:(##__VA_ARGS__)]
-
-
+#import "LoggerMacros.h"
 
 typedef NS_ENUM(NSUInteger, LoggerLevel) {
     LogLevelDebug,
     LogLevelInfo,
     LogLevelWarn,
-    LogLevelRelease,
+    LogLevelError,
 };
 
 typedef NS_ENUM(NSUInteger, LoggerWriteOption) {
@@ -69,10 +21,16 @@ typedef NS_ENUM(NSUInteger, LoggerWriteOption) {
     WriteToFile,
 };
 
+typedef NS_ENUM(NSUInteger, LoggerSavingOption) {
+    SaveAsynchronously,
+    SaveSynchronously,
+};
+
 @interface Logger : NSObject
 
 @property(nonatomic, assign, getter = currentLogLevel) LoggerLevel level; // LogLevelDebug will be default
 @property(nonatomic, assign) LoggerWriteOption writingOption; // WriteToConsole will be default
+@property(nonatomic, assign) LoggerSavingOption savingOption; // SaveAsynchronously will be default
 @property(nonatomic, strong, getter = currentFilePath) NSString *filePath;
 @property(nonatomic, strong) NSString *previousFilePath;
 
@@ -80,17 +38,10 @@ typedef NS_ENUM(NSUInteger, LoggerWriteOption) {
 #pragma mark - Singleton
 + (instancetype)sharedInstance;
 
-#pragma mark - Helper Methods for Writing
-- (void)writeDebugLog:(id)param;
-- (void)writeWarningLog:(id)param;
-- (void)writeReleaseLog:(id)param;
-- (void)writeInfoLog:(id)param;
-
-#pragma mark - -- Serialization --
-#pragma mark NSDictionary to NSString
-- (NSString *)serializeData:(id)jsonDictionary;
-
-#pragma mark NSString to NSDictionary
-- (NSMutableDictionary *)deSerializeData:(NSString *)strData;
++ (void)writeToFileWithlevel:(LoggerLevel)level
+                        file:(const char *)file
+                    function:(const char *)function
+                        line:(NSUInteger)line
+                      format:(NSString *)format, ...;
 
 @end
