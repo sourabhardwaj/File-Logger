@@ -78,7 +78,7 @@ typedef NS_ENUM(NSUInteger, LoggerWriteOption) {
 
 
 #pragma mark - Singleton
-+ (id)sharedInstance;
++ (instancetype)sharedInstance;
 
 #pragma mark - Helper Methods for Writing
 - (void)writeDebugLog:(id)param;

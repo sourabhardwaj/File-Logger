@@ -20,12 +20,20 @@
 
 #pragma mark - Singleton Instance
 static Logger *sharedObject = nil;
-+ (id)sharedInstance {
++ (instancetype)sharedInstance {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedObject = [[self alloc] init];
+        sharedObject = [[super alloc] init];
     });
     return sharedObject;
+}
+
++ (instancetype)alloc {
+    @synchronized(self) {
+//        NSAssert(sharedObject == nil, @"Attempted to allocate a second instance of a singleton.");
+        return [self sharedInstance];
+    }
+    return nil;
 }
 
 - (id)init {
