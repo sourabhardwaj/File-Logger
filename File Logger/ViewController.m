@@ -21,25 +21,40 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    [Logger sharedInstance];
     
-    [Logger writeDebugLog:@[@"123", @"456", @"789"]];
+//    DebugLogLevel(@"hello");
+//    DebugLogLevel(@"%@",@"123");
     
-    [Logger writeInfoLog:@"This is the file log line"];
+//    DebugLogLevel(@[@"123", @"456", @"789"]);
     
-    [Logger writeReleaseLog:@{@"key":@"value", @"sex":@"M"}];
+//    DebugLogLevel(@[@"123", @"456", @"789"]);
+    
+//    DebugLogLevel(@"This is the file log line");
+    
+//    DLog(@[@"123", @"456", @"789"]);
+    
+//    [[Logger sharedInstance] setWritingOption:WriteToFile];
+    
+    [[Logger sharedInstance] writeDebugLog:@"Debug log"];
 
-    [Logger writeWarningLog:@"The file log is of warning type"];
+    [[Logger sharedInstance] writeInfoLog:@"Info log"];
+
+    [[Logger sharedInstance] writeReleaseLog:@"Release log"];
+
+    [[Logger sharedInstance] writeWarningLog:@"Warning log"];
+
+    [[Logger sharedInstance] writeDebugLog:@[@"123", @"456", @"789",@"123", @"456", @"789",@"123", @"456", @"789",@"123", @"456", @"789"]];
     
-    [Logger writeDebugLog:@[@"123", @"456", @"789",@"123", @"456", @"789",@"123", @"456", @"789",@"123", @"456", @"789"]];
+    [[Logger sharedInstance] writeReleaseLog:@{@"key":@"value", @"sex":@"M",@"key2":@"value", @"sex2":@"M",@"key3":@"value", @"sex3":@"M",@"key4":@"value", @"sex4":@"M",@"key5":@"value", @"sex5":@"M",@"key6":@"value", @"sex6":@"M",@"key7":@"value", @"sex7":@"M",@"key8":@"value", @"sex8":@"M"}];
     
-    [Logger writeReleaseLog:@{@"key":@"value", @"sex":@"M",@"key2":@"value", @"sex2":@"M",@"key3":@"value", @"sex3":@"M",@"key4":@"value", @"sex4":@"M",@"key5":@"value", @"sex5":@"M",@"key6":@"value", @"sex6":@"M",@"key7":@"value", @"sex7":@"M",@"key8":@"value", @"sex8":@"M"}];
+    [[Logger sharedInstance] writeInfoLog:@"another info log line"];
+
+    [[Logger sharedInstance] writeReleaseLog:@{@"key-release":@"value-release", @"sex-release":@"M-release"}];
     
-    [Logger writeInfoLog:@"another info log line"];
+    [[Logger sharedInstance] writeWarningLog:@"type warning type warning type"];
     
-    [Logger writeReleaseLog:@{@"key-release":@"value-release", @"sex-release":@"M-release"}];
-    
-    [Logger writeWarningLog:@"type warning type warning type"];
+    [[Logger sharedInstance] writeReleaseLog:@{@"key":@"value", @"sex":@"M",@"key2":@"value", @"sex2":@"M",@"key3":@"value", @"sex3":@"M",@"key4":@"value", @"sex4":@"M",@"key5":@"value", @"sex5":@"M",@"key6":@"value", @"sex6":@"M",@"key7":@"value", @"sex7":@"M",@"key8":@"value", @"sex8":@"M"}];
+
 }
 
 - (void)didReceiveMemoryWarning {
