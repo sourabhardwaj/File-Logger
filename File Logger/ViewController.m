@@ -21,7 +21,7 @@
     [super viewDidLoad];
     
 //    [[Logger sharedInstance] setSavingOption:SaveSynchronously];
-    [[Logger sharedInstance] setWritingOption:WriteToFile];
+//    [[Logger sharedInstance] setWritingOption:WriteToFile];
     
     LogError(@"%@", @{@"key":@"value", @"sex":@"M",@"key2":@"value", @"sex2":@"M",@"key3":@"value", @"sex3":@"M",@"key4":@"value", @"sex4":@"M",@"key5":@"value", @"sex5":@"M",@"key6":@"value", @"sex6":@"M",@"key7":@"value", @"sex7":@"M",@"key8":@"value", @"sex8":@"M"});
     
